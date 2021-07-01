@@ -2,6 +2,8 @@ package com.liguebasketball.basketballsousse.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,19 +17,23 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
-
+@JsonInclude(value= JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown=true)
 @AllArgsConstructor @NoArgsConstructor @ToString
 public class Equipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idEquipe;
 
-    @NotNull
+
     @Column(unique = true,length = 50 ,nullable = false)
     private String nom;
-
     /*@Column
-    private int nombreDeJouers;
+    private int nombreVictoire;
+
+    @Column
+    private int nombreVictoire;
+    private nmb de point
 
     @Column
     private int matchJouer;
@@ -53,13 +59,12 @@ public class Equipe {
     @Column
     private String logo;
 
-    @Column
-    @CreationTimestamp
-    private Date dateDeCreation;
+
 
     @OneToMany(mappedBy = "equipe")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Player> player;
+
 
 
     public Long getIdEquipe() {
@@ -90,9 +95,6 @@ public class Equipe {
         return logo;
     }
 
-    public Date getDateDeCreation() {
-        return dateDeCreation;
-    }
 
     public Collection<Player> getPlayer() {
         return player;
@@ -126,9 +128,7 @@ public class Equipe {
         this.logo = logo;
     }
 
-    public void setDateDeCreation(Date dateDeCreation) {
-        this.dateDeCreation = dateDeCreation;
-    }
+
 
     @JsonIgnore
     public void setPlayer(Collection<Player> player) {

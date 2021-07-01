@@ -2,24 +2,25 @@ package com.liguebasketball.basketballsousse.entities;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class AppUser {
+public class AppUser implements Serializable {
 	@Id
-	@GeneratedValue
-	private Long id;
+	@GeneratedValue (strategy = GenerationType.	AUTO)
+	private Long idUser;
 	@Column(unique = true)
-	private String username;	
+	private String username;
 	private String password;
-	private boolean active;
+	private String email;
 	private String role;
+
+	private boolean active;
+
 
 }

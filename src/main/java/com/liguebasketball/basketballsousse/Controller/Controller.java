@@ -1,21 +1,41 @@
 package com.liguebasketball.basketballsousse.Controller;
 
 
-import com.liguebasketball.basketballsousse.dao.EquipeRepository;
-import com.liguebasketball.basketballsousse.dao.JourneeRepository;
-import com.liguebasketball.basketballsousse.dao.RencontreRepository;
-import com.liguebasketball.basketballsousse.entities.Equipe;
-import com.liguebasketball.basketballsousse.entities.Rencontre;
-import com.liguebasketball.basketballsousse.model.RencontreResult;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+
+
+
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import javax.validation.Valid;
+
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.liguebasketball.basketballsousse.dao.*;
+
+import com.liguebasketball.basketballsousse.entities.Arbitre;
+import com.liguebasketball.basketballsousse.entities.Equipe;
+import com.liguebasketball.basketballsousse.entities.Ligue;
+import com.liguebasketball.basketballsousse.model.RencontreModel;
+import com.liguebasketball.basketballsousse.model.RencontreResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
+
 @CrossOrigin("*")
 public class Controller {
 
@@ -27,24 +47,53 @@ public class Controller {
 
     @Autowired
     private EquipeRepository equipeRepository;
+    @Autowired
+    private LigueRepository ligueRepository;
 
-    @GetMapping("/allRencontre")
-    public List<RencontreResult> getRencontre(){
+@Autowired
+    ArbitreRepository arbitreRepository;
+ /*@GetMapping("/allRencontre")
+    public List<HashMap<String, Object> getRencontre(){
 
-        List<RencontreResult> allRencontre= new ArrayList<RencontreResult>();
+        List<HashMap<String, Object>> allRencontre= new ArrayList<>();
         for (Rencontre rencontre : rencontreRepository.findAll()) {
-            RencontreResult rencontreResult = new RencontreResult();
-            rencontreResult.setDateDuMatch(rencontre.getDateDuMatch());
-            System.out.println(equipeRepository.getById(rencontre.getIdEquipe1()));
-            Equipe eq1=equipeRepository.getById(rencontre.getIdEquipe1());
-           rencontreResult.setIdEquipe1(eq1);
+            HashMap<String, Object> eq1 = new HashMap<String, Object>();
+
+            HashMap<String, Object> eq2 = new HashMap<String, Object>();
+
+            HashMap<String, Object> ligue= new HashMap<String, Object>();
+            HashMap<String, Object> arbitre= new HashMap<String, Object>();
+            eq1.put("eq1",equipeRepository.findById(rencontre.getIdEquipe1()));
+            eq2.put("eq2",equipeRepository.findById(rencontre.getIdEquipe2()));
 
 
 
-            allRencontre.add(rencontreResult);
+
+            allRencontre.add(eq1);
+            allRencontre.add(eq2);
+
         }
         return allRencontre;
-    }
+    }*/
+@GetMapping("/all")
+ public List<RencontreModel> getAllRencontre(){
+
+     List<RencontreModel> allRencontre= new ArrayList<RencontreModel>();
+     rencontreRepository.findAll().stream().forEach((rencontre)->{
+         RencontreModel rencontreResult = new RencontreModel();
+rencontreResult.setLieuDuRentre(rencontre.getLieuDuRencontre());
+rencontreResult.setDateDuRencontre(rencontre.getDateDuRencontre());
+         Equipe eq1=equipeRepository.getById(rencontre.getIdEquipe1());
+         rencontreResult.setIdEquipe1(eq1);
+         Equipe eq2=equipeRepository.getById(rencontre.getIdEquipe2());
+         rencontreResult.setIdEquipe2(eq2);
+
+
+         allRencontre.add(rencontreResult);
+     });
+     return allRencontre;
+ }
+
 
 
 }

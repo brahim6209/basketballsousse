@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Entity
@@ -28,4 +29,6 @@ public class Arbitre {
     @ManyToOne
     private Journee journee;
 
+    @OneToMany(mappedBy = "arbitre")
+private Collection<Rencontre> rencontre;
 }

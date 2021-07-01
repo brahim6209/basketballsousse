@@ -26,7 +26,7 @@ public class Journee {
     @Column
     private String designation;
 
-    @Column
+ /*   @Column
     private int resultatEquipe1;
 
     @Column
@@ -39,7 +39,7 @@ public class Journee {
 
     @Column
     private boolean ganante;
-
+*/
 
   /*  @Column
     private int fauteProvoquer;

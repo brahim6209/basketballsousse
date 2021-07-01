@@ -1,10 +1,13 @@
 package com.liguebasketball.basketballsousse;
 
 import com.liguebasketball.basketballsousse.entities.*;
+import com.liguebasketball.basketballsousse.model.RencontreResult;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 import javax.management.relation.Role;
@@ -33,6 +36,8 @@ public class BasketballsousseApplication  implements CommandLineRunner {
             repositoryRestConfiguration.exposeIdsFor(Ligue.class);
 
 
+
         }
+
 
 }
