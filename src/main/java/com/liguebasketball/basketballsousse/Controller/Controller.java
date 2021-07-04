@@ -21,8 +21,10 @@ import com.liguebasketball.basketballsousse.dao.*;
 import com.liguebasketball.basketballsousse.entities.Arbitre;
 import com.liguebasketball.basketballsousse.entities.Equipe;
 import com.liguebasketball.basketballsousse.entities.Ligue;
+import com.liguebasketball.basketballsousse.entities.Rencontre;
 import com.liguebasketball.basketballsousse.model.RencontreModel;
 import com.liguebasketball.basketballsousse.model.RencontreResult;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -81,8 +83,11 @@ public class Controller {
      List<RencontreModel> allRencontre= new ArrayList<RencontreModel>();
      rencontreRepository.findAll().stream().forEach((rencontre)->{
          RencontreModel rencontreResult = new RencontreModel();
-rencontreResult.setLieuDuRentre(rencontre.getLieuDuRencontre());
+         rencontreResult.setIdRencontre(rencontre.getIdRencontre());
+rencontreResult.setLieuDuRencontre(rencontre.getLieuDuRencontre());
 rencontreResult.setDateDuRencontre(rencontre.getDateDuRencontre());
+rencontreResult.setResultatEquipe1(rencontre.getResultatEquipe1());
+rencontreResult.setResultatEquipe2(rencontre.getResultatEquipe2());
          Equipe eq1=equipeRepository.getById(rencontre.getIdEquipe1());
          rencontreResult.setIdEquipe1(eq1);
          Equipe eq2=equipeRepository.getById(rencontre.getIdEquipe2());
@@ -94,6 +99,23 @@ rencontreResult.setDateDuRencontre(rencontre.getDateDuRencontre());
      return allRencontre;
  }
 
+@PutMapping("/update")
+    public void update(@RequestBody Rencontre rencontre){
+    System.out.println(rencontre);
+    Rencontre updateRencontre= rencontreRepository.findById(rencontre.getIdRencontre()).get();
+    updateRencontre.setDateDuRencontre(rencontre.getDateDuRencontre());
+    updateRencontre.setIdEquipe1(rencontre.getIdEquipe1());
+    updateRencontre.setIdEquipe2(rencontre.getIdEquipe2());
+    updateRencontre.setLieuDuRencontre(rencontre.getLieuDuRencontre());
+    updateRencontre.setResultatEquipe1(rencontre.getResultatEquipe1());
+    updateRencontre.setResultatEquipe2(rencontre.getResultatEquipe2());
+    rencontre.setResultatEquipe1(rencontre.getResultatEquipe1());
+    rencontre.setResultatEquipe2(rencontre.getResultatEquipe2());
+    updateRencontre.setIdLigue(rencontre.getIdLigue());
 
+    rencontreRepository.save(updateRencontre);
+
+
+}
 
 }

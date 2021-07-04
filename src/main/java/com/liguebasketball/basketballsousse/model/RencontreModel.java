@@ -13,10 +13,61 @@ import java.util.Date;
 @ToString
 @Builder
 public class RencontreModel {
+private  Long idRencontre;
+
+private  int resultatEquipe1;
+
+    public int getResultatEquipe1() {
+        return resultatEquipe1;
+    }
+
+    public void setResultatEquipe1(int resultatEquipe1) {
+        this.resultatEquipe1 = resultatEquipe1;
+    }
+
+    public int getResultatEquipe2() {
+        return resultatEquipe2;
+    }
+
+    public void setResultatEquipe2(int resultatEquipe2) {
+        this.resultatEquipe2 = resultatEquipe2;
+    }
+
+    private  int resultatEquipe2;
+
+    public Long getIdRencontre() {
+        return idRencontre;
+    }
+
+    public void setIdRencontre(Long idRencontre) {
+        this.idRencontre = idRencontre;
+    }
+
+
 
     private Date dateDuRencontre;
 
-    private String lieuDuRentre;
+    public String getLieuDuRencontre() {
+        return lieuDuRencontre;
+    }
+
+    public RencontreModel(Long idRencontre, int resultatEquipe1, int resultatEquipe2, Date dateDuRencontre, String lieuDuRencontre, Equipe idEquipe1, Equipe idEquipe2, Journee idJournee, Ligue idLigue) {
+        this.idRencontre = idRencontre;
+        this.resultatEquipe1 = resultatEquipe1;
+        this.resultatEquipe2 = resultatEquipe2;
+        this.dateDuRencontre = dateDuRencontre;
+        this.lieuDuRencontre = lieuDuRencontre;
+        this.idEquipe1 = idEquipe1;
+        this.idEquipe2 = idEquipe2;
+        this.idJournee = idJournee;
+        this.idLigue = idLigue;
+    }
+
+    public void setLieuDuRencontre(String lieuDuRencontre) {
+        this.lieuDuRencontre = lieuDuRencontre;
+    }
+
+    private String lieuDuRencontre;
 
 
     private Equipe idEquipe1;
@@ -32,13 +83,9 @@ public class RencontreModel {
         this.dateDuRencontre = dateDuRencontre;
     }
 
-    public String getLieuDuRentre() {
-        return lieuDuRentre;
-    }
 
-    public void setLieuDuRentre(String lieuDuRentre) {
-        this.lieuDuRentre = lieuDuRentre;
-    }
+
+
 
     public Equipe getIdEquipe1() {
         return idEquipe1;
@@ -69,15 +116,6 @@ public class RencontreModel {
     }
 
     public void setIdLigue(Ligue idLigue) {
-        this.idLigue = idLigue;
-    }
-
-    public RencontreModel(Date dateDuRencontre, String lieuDuRentre, Equipe idEquipe1, Equipe idEquipe2, Journee idJournee, Ligue idLigue) {
-        this.dateDuRencontre = dateDuRencontre;
-        this.lieuDuRentre = lieuDuRentre;
-        this.idEquipe1 = idEquipe1;
-        this.idEquipe2 = idEquipe2;
-        this.idJournee = idJournee;
         this.idLigue = idLigue;
     }
 
