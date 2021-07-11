@@ -1,5 +1,6 @@
 package com.liguebasketball.basketballsousse.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,10 +26,12 @@ public class Arbitre {
     private String prenom;
 
     
-    
-    @ManyToOne
-    private Journee journee;
+//
+//    @ManyToOne
+//    private Journee journee;
 
     @OneToMany(mappedBy = "arbitre")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 private Collection<Rencontre> rencontre;
+
 }

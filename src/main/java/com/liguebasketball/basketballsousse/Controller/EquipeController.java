@@ -180,16 +180,16 @@ public class EquipeController {
     }
 
     @PutMapping("/equipes/{id}")
-    public ResponseEntity<Equipe> updateArticle(@PathVariable("id") long id, @RequestBody Equipe Equipe) {
+    public ResponseEntity<Equipe> updateEquipe(@PathVariable("id") long id, @RequestBody Equipe Equipe) {
         System.out.println("Update Equipe with ID = " + id + "...");
         Optional<Equipe> EquipeInfo = repository.findById(id);
         if (EquipeInfo.isPresent()) {
             Equipe equipe = EquipeInfo.get();
             equipe.setNom(Equipe.getNom());
-            equipe.setPointMarquer(Equipe.getPointMarquer());
-            equipe.setPointEncaisses(Equipe.getPointEncaisses());
-            equipe.setMatchJouerExterieur(Equipe.getMatchJouerExterieur());
-            equipe.setMatchJouerDomicile(Equipe.getMatchJouerDomicile());
+            equipe.setNbPointMarquer(Equipe.getNbPointMarquer());
+            equipe.setNbPointEncaisses(Equipe.getNbPointEncaisses());
+            equipe.setNbMatchJouerExterieur(Equipe.getNbMatchJouerExterieur());
+            equipe.setNbMatchJouerDomicile(Equipe.getNbMatchJouerDomicile());
             equipe.setPlayer(Equipe.getPlayer());
             return new ResponseEntity<>(repository.save(Equipe), HttpStatus.OK);
         } else {

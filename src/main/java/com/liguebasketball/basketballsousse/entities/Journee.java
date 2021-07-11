@@ -1,6 +1,7 @@
 package com.liguebasketball.basketballsousse.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,47 +21,22 @@ public class Journee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idJournee;
 
-  /*  @Column
-    private Date dateDuMatch;*/
 
     @Column
     private String designation;
 
- /*   @Column
-    private int resultatEquipe1;
-
-    @Column
-    private int resultatEquipe2;
-
-    @Column
-    private boolean aDomicile;
 
 
 
-    @Column
-    private boolean ganante;
-*/
-
-  /*  @Column
-    private int fauteProvoquer;
-
-    @Column
-    private int passeDecisives;
-
-    @Column
-    private int ballesPerdues;
-
-    @Column
-    private int interception;*/
-
-   @OneToMany (mappedBy = "journee")
-    private Collection<Arbitre> arbitres;
+//   @OneToMany (mappedBy = "journee")
+//   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    private Collection<Arbitre> arbitres;
 
     @ManyToOne
 	private Ligue ligue;
 
     @OneToMany(mappedBy = "journee")
-
+   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Rencontre> rencontres;
 
 

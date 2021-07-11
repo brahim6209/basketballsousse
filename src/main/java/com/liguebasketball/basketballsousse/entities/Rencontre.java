@@ -39,16 +39,16 @@ public class Rencontre {
 @Column
 private Long idLigue;
     @Column
-    private int resultatEquipe1;
+    private Integer resultatEquipe1;
     @Column
-    private int resultatEquipe2;
+    private Integer resultatEquipe2;
     @Column
-    private boolean gagnante;
+    private Integer gagnante;
 
 
 
     @ManyToOne
-    private     Journee journee;
+    private    Journee journee;
 
 
 

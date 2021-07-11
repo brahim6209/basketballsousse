@@ -1,7 +1,7 @@
 package com.liguebasketball.basketballsousse;
 
 import com.liguebasketball.basketballsousse.entities.*;
-import com.liguebasketball.basketballsousse.model.RencontreResult;
+
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
